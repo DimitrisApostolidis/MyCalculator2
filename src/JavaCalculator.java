@@ -25,6 +25,8 @@ public class JavaCalculator {
     private JButton btnFour;
     private JButton btnSeven;
     private JButton btnZero;
+    private JButton button1;
+    private JButton backButton;
 
     private void getOperator (String btnText) {
         math_operator = btnText.charAt(0);
@@ -208,7 +210,36 @@ public class JavaCalculator {
 
             }
         });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String backspace = null;
+
+                if(textDisplay.getText().length() > 0){
+                    StringBuilder strB = new StringBuilder(textDisplay.getText());
+                    strB.deleteCharAt(textDisplay.getText().length() - 1);
+                    backspace = String.valueOf(strB);
+                    textDisplay.setText(backspace);
+                }
+            }
+        });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(textDisplay.getText().contains(".")){
+                    double pm = Double.parseDouble(textDisplay.getText());
+                    pm = pm*-1;
+                    textDisplay.setText(String.valueOf(pm));
+                }
+                else {
+                    long PM = Long.parseLong(textDisplay.getText());
+                    PM = PM*-1;
+                    textDisplay.setText(String.valueOf(PM));
+                }
+            }
+        });
     }
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("JavaCalculator");
